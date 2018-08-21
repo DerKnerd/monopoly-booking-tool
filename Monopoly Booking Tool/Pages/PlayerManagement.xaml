@@ -1,0 +1,52 @@
+﻿<Page x:Class="Monopoly_Booking_Tool.Pages.PlayerManagement"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:my="clr-namespace:Monopoly_Booking_Tool">
+    <Page.Resources>
+        <my:Converter x:Key="Convert" />
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ToolBarTray>
+            <ToolBar>
+                <Button ToolTip="Speichern..." Click="save_Click">
+                    <Image Height="16" Source="/Monopoly%20Booking%20Tool;component/Images/saveHS.png" />
+                </Button>
+                <Button ToolTip="Öffnen..." Click="open_Click">
+                    <Image Height="16" Source="/Monopoly%20Booking%20Tool;component/Images/openHS.png" />
+                </Button>
+                <Separator />
+                <Button ToolTip="Spieler hinzufügen" Click="addPlayer_Click">
+                    <Image Height="16" Source="/Monopoly%20Booking%20Tool;component/Images/112_Plus_Green_16x16_72.png" />
+                </Button>
+                <Label Content="Spieler: " />
+                <ComboBox Name="player" Width="100" DisplayMemberPath="{Binding Name}" SelectionChanged="player_SelectionChanged"></ComboBox>
+                <Separator />
+                <Button Click="trans_Click">Transaktion</Button>
+            </ToolBar>
+        </ToolBarTray>
+        <Grid Grid.Row="1" Name="book" DataContext="{Binding ElementName=player, Path=SelectedItem}">
+            <ListView Name="bookings" ItemsSource="{Binding Book}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="" DisplayMemberBinding="{Binding Positiv, Converter={StaticResource Convert}}" />
+                        <GridViewColumn Header="Kontostand" DisplayMemberBinding="{Binding Current, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Umsatz" DisplayMemberBinding="{Binding Additional, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Neuer Kontostand" DisplayMemberBinding="{Binding New, StringFormat=\{0:c\}}" />
+                        <GridViewColumn Header="Verwendungszweck" DisplayMemberBinding="{Binding Subject}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <StatusBar Grid.Row="2">
+            <StatusBarItem>Kontostand:</StatusBarItem>
+            <StatusBarItem Name="konto" ContentStringFormat="{}{0:c}" />
+        </StatusBar>
+    </Grid>
+</Page>

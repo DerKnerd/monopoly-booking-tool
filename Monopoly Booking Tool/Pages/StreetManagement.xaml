@@ -1,0 +1,49 @@
+﻿<Page x:Class="Monopoly_Booking_Tool.Pages.StreetManagement"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:my="clr-namespace:Monopoly_Booking_Tool">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ToolBar>
+            <Button ToolTip="Speichern..." Click="save_Click">
+                <Image Height="16" Source="/Monopoly%20Booking%20Tool;component/Images/saveHS.png" />
+            </Button>
+            <Button ToolTip="Öffnen..." Click="open_Click">
+                <Image Height="16" Source="/Monopoly%20Booking%20Tool;component/Images/openHS.png" />
+            </Button>
+            <Separator />
+            <Button ToolTip="Straße hinzufügen" Click="addStreet_Click">
+                <Image Height="16" Source="/Monopoly%20Booking%20Tool;component/Images/112_Plus_Green_16x16_72.png" />
+            </Button>
+            <Separator />
+            <Button ToolTip="Appartment hinzufügen" Command="{x:Static my:Commands.AddAppartment}">
+                <Image Height="16" Source="/Monopoly%20Booking%20Tool;component/Images/112_Plus_Blue_16x16_72.png" />
+            </Button>
+            <Button ToolTip="Appartment entfernen" Command="{x:Static my:Commands.RemoveAppartment}">
+                <Image Height="16" Source="/Monopoly%20Booking%20Tool;component/Images/112_Minus_Blue_16x16_72.png" />
+            </Button>
+            <Button ToolTip="Appartments löschen" Click="remove_Click">
+                <Image Height="16" Source="/Monopoly%20Booking%20Tool;component/Images/112_Minus_Orange_16x16_72.png" />
+            </Button>
+        </ToolBar>
+        <ListView Grid.Row="1" Name="street" ItemsSource="{Binding}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Anzahl Appartments" DisplayMemberBinding="{Binding AppartmentCount}" />
+                    <GridViewColumn Header="Aktuelle Miete" DisplayMemberBinding="{Binding CurrentRent, StringFormat=\{0:c\}}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StatusBar Grid.Row="2">
+            <StatusBarItem>Irgendwas:</StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Page>
